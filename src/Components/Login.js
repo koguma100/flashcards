@@ -34,7 +34,7 @@ const Login = () => {
                 <h1 className="title"> Flashcards </h1>        
                 <section className="form">
                     <div className="login-form">                                            
-                        <h1> Welcome Back! </h1>                                 
+                        <h1> Welcome Back </h1>                                 
                         <form>                                              
                             <div>
                                 <input

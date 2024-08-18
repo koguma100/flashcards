@@ -1,0 +1,83 @@
+/* .flashcard {
+    border: 2px solid #000;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    width: 60%;
+    height: 16vw;
+    border-radius: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2vw auto;
+}
+
+.flashcard:active {
+    border: none;
+}
+
+.flashcard-input {
+    outline: none;
+    border: none;
+    width: 80%;
+}
+
+.flashcard-input:focus {
+    border: none;
+    outline: none;
+}
+
+.flashcard-input-back {
+    outline: none;
+    border: none;
+    width: 80%;
+    height: 100%;
+} */
+
+.flashcard {
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    border: 2px solid #333; /* Border for the flashcard */
+    border-radius: 2vw;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2vw auto;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden; /* Ensure the input stays within the border */
+  }
+  
+  .flashcard-input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none; /* Remove default input border */
+    outline: none; /* Remove default focus outline */
+    font-size: 5vw; /* Adjust font size as needed for front */
+    background: transparent; /* Transparent background */
+    padding: 0;
+    box-sizing: border-box; /* Ensure padding is inside the border */
+  }
+  
+  .flashcard-input-back {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none; /* Remove default input border */
+    outline: none; /* Remove default focus outline */
+    font-size: 3vw; /* Smaller font size for the back */
+    background: transparent; /* Transparent background */
+    padding: 10px; /* Adjust padding to fill the full border */
+    box-sizing: border-box; /* Ensure padding is inside the border */
+  }
+  
+  /* Ensure the inputs fit perfectly within the flashcard without overflowing */
+  .flashcard input {
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's width and height */
+    text-align: center; /* Center the text within the input */
+  }
+  

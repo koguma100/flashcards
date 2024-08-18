@@ -3,6 +3,10 @@
     --hovercolor: #43A047;
 }
 
+h2 {
+    width: 100%;
+}
+
 .navigation {
     display: flex;
     justify-content: space-around;
@@ -23,6 +27,7 @@
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    border-radius: 1vw;
 }
 
 .logout-button:hover {
@@ -33,13 +38,91 @@
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     padding-bottom: 20px;
-    width: 264px;
+    width: 15vw; 
+    height: 13vw;
+    margin-bottom: 2%;
+    border-radius: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .flash-card-block:hover {
-    background-color: rgb(222, 219, 219);
+    width: 16vw; 
+    height: 14vw;
+    font-size-adjust: 4px;
+}
+
+.flash-card-block:active {
+    width: 14vw; 
+    height: 12vw;
+}
+
+.card-set-image-wrapper {
+    width: 13vw;
+    height: 10vw;
+    border: 2px solid #000;
+    border-top-left-radius: 2vw;  
+    border-top-right-radius: 2vw;
+}
+
+.flash-card-block:hover > .card-set-image-wrapper {
+    width: 14vw;
+    height: 11vw;
+}
+
+.flash-card-block:active > .card-set-image-wrapper {
+    width: 12vw;
+    height: 9vw;
+}
+
+
+.card-block-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    padding: none;
+    padding-top: 2%;
 }
 
 .plus-symbol {
     font-size: 48px;
 }
+
+.no-select {
+    user-select: none; /* Standard syntax */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.top-border {
+    border-top: 2px solid #000; /* Width, style, and color of the border */
+}
+
+.card-sets {
+    margin: 10%;
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    margin: 3vw;
+    border: 8px solid rgba(0, 0, 0, 0.1); /* Light gray background */
+    border-top: 8px solid #3498db; /* Blue color for the spinning part */
+    border-radius: 50%; /* Makes the spinner round */
+    animation: spin 1s linear infinite; /* Spinning animation */
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
