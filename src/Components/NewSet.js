@@ -97,8 +97,9 @@ const NewSet = () => {
       const dataRef = ref(db, 'users/' + auth.currentUser.uid + '/sets');
       // Set data at the specified location
       const flashcardsObj = Object.assign({}, flashcards);
-
-      if (title in data) {
+      
+      console.log(data);
+      if (!(title in data.sets)) {
         const updates = {
           [title]: flashcardsObj  
         }
