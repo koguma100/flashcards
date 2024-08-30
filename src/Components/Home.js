@@ -10,7 +10,7 @@ const Home = () => {
     const [userInfo, setUserInfo] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
     const [dataLoaded, setDataLoaded] = useState(false);
 
     const handleLogout = () => {               
@@ -36,9 +36,7 @@ const Home = () => {
             if (user) {
               // User is signed in, see docs for a list of available properties
               // https://firebase.google.com/docs/reference/js/firebase.User
-              setUserInfo(user.uid);
-              console.log(userInfo);
-              
+              setUserInfo(user.uid);              
             } else {
               // User is signed out
               // ...
@@ -46,7 +44,7 @@ const Home = () => {
             }
           });
          
-    }, [])
+    }, [auth])
 
     useEffect(() => {
       const fetchData = async () => {
@@ -64,6 +62,7 @@ const Home = () => {
             setData( data => ({
               ...snapshot.val()
             }));
+            console.log(data)
             setDataLoaded(true);
           
           } else {
@@ -75,7 +74,7 @@ const Home = () => {
       };
   
       fetchData();
-    }, [location]);
+    }, [userInfo, location]);
  
   return (
     <section>
@@ -86,7 +85,7 @@ const Home = () => {
          
       <div className="card-sets top-border">
         <h2 className="no-select">Flashcard Sets</h2>
-        { dataLoaded ? 
+        { dataLoaded && "sets" in data? 
           Object.entries(data.sets).map(([key]) => (
             <div className="card-block-wrapper" key={key} onClick={() => viewSet(key, data)}>
               
@@ -98,9 +97,10 @@ const Home = () => {
               </div>
             </div>
           ))
-          : <div className="card-block-wrapper">
+          : !dataLoaded ? <div className="card-block-wrapper">
               <div class="spinner"></div>
             </div>
+            : <div></div>
         }
         <div className="card-block-wrapper">
           <div className="flash-card-block no-select" onClick={createNewSet}> 

@@ -99,7 +99,7 @@ const NewSet = () => {
       const flashcardsObj = Object.assign({}, flashcards);
       
       console.log(data);
-      if (!(title in data.sets)) {
+      if (!data.sets || !(title in data.sets)) {
         const updates = {
           [title]: flashcardsObj  
         }
