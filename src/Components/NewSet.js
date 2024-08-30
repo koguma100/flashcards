@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from '../firebase';
 import {  signOut } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
-import { set, update, ref } from "firebase/database";
+import { useNavigate, useLocation } from 'react-router-dom';
+import { get, update, ref } from "firebase/database";
 import "./styling/NewSet.css";
 
 const NewSet = () => {
@@ -13,6 +13,40 @@ const NewSet = () => {
     const [fontSize, setFontSize] = useState(5); // Default font size in vw
     const [flashcards, setFlashcards] = useState([{ id: 0, front: '', back: ''}]);
     const [showFront, setShowFront] = useState([true]);
+    const [data, setData] = useState({});
+    const [dataLoaded, setDataLoaded] = useState(false);
+    const [message, setMessage] = useState("");
+    const location = useLocation();
+
+    // gets user flashcard data
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          // Reference to the path in the database
+          const dataRef = ref(db, 'users/' + auth.currentUser.uid); 
+  
+          // Fetch data from the database
+          const snapshot = await get(dataRef);
+  
+          if (snapshot.exists()) {
+            // Set data to state
+            console.log(snapshot.val());
+
+            setData( data => ({
+              ...snapshot.val()
+            }));
+            setDataLoaded(true);
+          
+          } else {
+            console.log('No data available');
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, [location]);
 
     const handleAddFlashcard = () => {
       setFlashcards([...flashcards, { id: flashcards.length, front: '', back: ''}]);
@@ -61,9 +95,10 @@ const NewSet = () => {
 
     const handleSubmit = () => {
       const dataRef = ref(db, 'users/' + auth.currentUser.uid + '/sets');
-        // Set data at the specified location
-        const flashcardsObj = Object.assign({}, flashcards);
-      
+      // Set data at the specified location
+      const flashcardsObj = Object.assign({}, flashcards);
+
+      if (title in data) {
         const updates = {
           [title]: flashcardsObj  
         }
@@ -75,8 +110,13 @@ const NewSet = () => {
           .catch((error) => {
             console.error('Error saving data: ', error);
             // Handle errors here
-          });
-      navigate("/home");
+            });
+        navigate("/home");
+      }
+      else {
+        setMessage("Title in use. Please change");
+      }
+      
     }
     
     const handleRemoveFlashcard = (id) => {
@@ -142,6 +182,7 @@ const NewSet = () => {
         <button onClick={() => handleRemoveFlashcard(flashcards.length - 1)}>Remove</button>
         <button onClick={handleCancel}>Cancel</button>
         <button type="submit" onClick={handleSubmit}>Submit</button>
+        <div>{message}</div>
       </div>
       
     );

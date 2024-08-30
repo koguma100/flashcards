@@ -10,7 +10,7 @@ import { getDatabase } from "firebase/database";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAw6i2MMXEEGKneR5yspwTYHBBs7NYkOW8",
+  apiKey: "AIzaSyC6IHXQ0OM4eDU-_LR3gzKDRvU3XGqv2po",
   authDomain: "flashcards-471bb.firebaseapp.com",
   projectId: "flashcards-471bb",
   storageBucket: "flashcards-471bb.appspot.com",

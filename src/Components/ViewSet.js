@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase';
-import { get, ref } from "firebase/database";
+import { get, ref, remove } from "firebase/database";
 
 const ViewSet = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { title, userData } = location.state || {};
+    const { title, userData } = location.state || {};   // 
     const [dataLoaded, setDataLoaded] = useState(false);
     const [showFront, setShowFront] = useState([]);
 
@@ -40,7 +40,20 @@ const ViewSet = () => {
     }
 
     const navigateHome = () => {
-         navigate("/home");
+      navigate("/home");
+    }
+
+    const handleDelete = () => {
+      const keyRef = ref(db, 'users/' + auth.currentUser.uid + '/sets/' + title);
+
+      remove(keyRef)
+        .then(() => {
+          console.log('Key deleted successfully!');
+        })
+        .catch((error) => {
+          console.error('Error deleting key:', error);
+        });
+      navigate("/home");
     }
 
     return (
@@ -66,11 +79,13 @@ const ViewSet = () => {
                   
                 </div>
                 <button className="no-select" onClick={() => flipCard(value.id)}>flip</button>
+                
               </div>
             )) :
                 <div className="spinner"></div>
             }
             <button onClick={navigateHome}>Home</button>
+            <button className="delete-button" onClick={handleDelete}>Delete</button>
         </div>
     )
 }
