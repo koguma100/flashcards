@@ -98,7 +98,7 @@ const Home = () => {
             </div>
           ))
           : !dataLoaded ? <div className="card-block-wrapper">
-              <div class="spinner"></div>
+              <div className="spinner"></div>
             </div>
             : <div></div>
         }

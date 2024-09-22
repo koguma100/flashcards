@@ -7,6 +7,7 @@ const ViewSet = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { title, userData } = location.state || {};   // 
+    const [titleNew, setTitleNew] = useState(title);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [showFront, setShowFront] = useState([]);
 
@@ -56,9 +57,13 @@ const ViewSet = () => {
       navigate("/home");
     }
 
+    const editSet = (title) => {
+      navigate('/edit', { state: { title: titleNew} });
+    };
+
     return (
         <div>
-            <div>{title}</div>
+            <div className="title">{title}</div>
             { dataLoaded ? Object.entries(userData.sets[title]).map(([key, value]) => (
                 <div key={value.id + 'container'} className="flashcard-container">
                 <div className="flashcard" key={value.id}>
@@ -86,6 +91,7 @@ const ViewSet = () => {
             }
             <button onClick={navigateHome}>Home</button>
             <button className="delete-button" onClick={handleDelete}>Delete</button>
+            <button className="edit-button" onClick={() => editSet(title)}>Edit</button>
         </div>
     )
 }

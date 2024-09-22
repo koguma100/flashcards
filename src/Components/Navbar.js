@@ -5,6 +5,7 @@ import Signup from './Signup.js';
 import Login from './Login.js';
 import NewSet from './NewSet.js';
 import ViewSet from './ViewSet.js'
+import EditSet from './EditSet.js'
 import { BrowserRouter as Router} from 'react-router-dom';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { auth  } from '../firebase.js';
@@ -32,7 +33,8 @@ const Navbar = () => {
               <Route path="/signup" element={ <Signup />}>Sign up</Route>
               <Route path="/home" element={ isAuthenticated ? <Home /> : <Navigate to="/" />}>Home</Route>
               <Route path="/new" element={ isAuthenticated ? <NewSet /> : <Navigate to="/" />}>NewCard</Route>
-              <Route path="/view" element={ <ViewSet/> }>ViewSet</Route>
+              <Route path="/view" element= { isAuthenticated ? <ViewSet/> : <Navigate to="/" />}>ViewSet</Route>
+              <Route path="/edit" element= { isAuthenticated ? <EditSet/> : <Navigate to="/" />}>EditSet</Route>
             </Routes>
           </section>
         </div>
