@@ -43,10 +43,9 @@ const EditSet = () => {
               key,
               ...value,
             })))
-            Object.entries(snapshot.val().sets[title]).forEach(([key, item]) => {
-              setShowFront([...showFront, true]);
-            });
-            setShowFront([...showFront, true])
+            
+            setShowFront(Array(snapshot.val().sets[title].length).fill(true));
+
           } else {
             console.log('No data available');
           }
